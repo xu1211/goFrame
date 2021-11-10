@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package helloword;
+
 // 请求消息
 message helloRequest {
   // 姓名
