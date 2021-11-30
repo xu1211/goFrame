@@ -26,17 +26,21 @@ func main() {
 	// 1.创建路由
 	r := gin.New()
 
-	// 注册中间件
+	// 注册全局中间件
 	r.Use(myMiddleWare())
+
+	// 添加路由
 	{
 		r.GET("/ce", func(c *gin.Context) {
-			// 取值
+			// 取参
 			req, _ := c.Get("request")
 			fmt.Println("request:", req)
-			// 页面接收
+			// 返回
 			c.JSON(200, gin.H{"request": req})
 		})
 
 	}
+
+	// 启动监听
 	r.Run(":8000")
 }

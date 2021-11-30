@@ -46,10 +46,15 @@
 
 - 同步异步处理
 
-## [中间件](./middleWare/middleWare.go)
+## [中间件](./middleWare/)
 相当于过滤器，拦截器
-- gin.Default() 会默认加载框架内置的中间件 Logger(), Recovery()\
+> 用gin.New() 创建的路由 没有加载其他中间件\
+用gin.Default() 创建的路由 会默认加载框架内置的中间件 Logger(), Recovery()\
   logger可以很方便的进行调试，recovery可以使用panic中断的恢复。
-- gin.New.Use(中间件)  加载中间件
+
+
+- [全局中间件](./middleWare/GlobalMiddleWare.go)
+  - gin.New.Use(中间件)  加载全局中间件
+- [局部中间件](./middleWare/LocalMiddleWare.go)
 
 ## cookie session token

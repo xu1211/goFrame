@@ -17,7 +17,7 @@ func main() {
 		v1.GET("submit", submit)
 	}
 
-	// 创建路由组/v2 ，处理GET请求
+	// 创建路由组/v2 ，处理POST请求
 	v2 := r.Group("/v2")
 	{
 		v2.POST("/login", login)
@@ -27,6 +27,7 @@ func main() {
 	r.Run(":8000")
 }
 
+// 处理类
 func login(c *gin.Context) {
 	name := c.DefaultQuery("name", "jack")
 	c.String(200, fmt.Sprintf("hello %s\n", name))
