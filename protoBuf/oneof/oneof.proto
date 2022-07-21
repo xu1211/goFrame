@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package oneof;
+
+
+message oneofTest {
+    oneof oneofName {
+        string filed1 = 1;
+        int32 filed2 = 2;
+    }
+}
