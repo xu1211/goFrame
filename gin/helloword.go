@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -21,11 +22,14 @@ func main() {
 		// *gin.Context.String() 输出response
 		c.String(http.StatusOK, "hello World!")
 	})
-	r.POST("/post")
+	r.POST("/post", func(c *gin.Context) {
+		data, _ := ioutil.ReadAll(c.Request.Body)
+		fmt.Printf("ctx.Request.body: %v", string(data))
+	})
 	r.PUT("/put")
 
 	// 3.监听端口，Run("里面不指定端口号默认为8080")
 	fmt.Println("Please Visit -  http://localhost:8000")
-	r.Run(":8000")
+	r.Run(":800")
 
 }
