@@ -43,10 +43,13 @@ func helloword() {
 	}
 }
 
+/* 测试onefo, 不能用 json.Marshal序列化 ,要用 protojson.Marshal */
 func onefoTest() {
 	var (
 		obj *pboneof.OneofTest
 	)
+
+	// oneofName可能是 Filed1(string) 也可能是 Filed2(int32); 最多只能存在一个
 	obj = &pboneof.OneofTest{
 		OneofName: &pboneof.OneofTest_Filed1{Filed1: "string"},
 	}
@@ -55,10 +58,11 @@ func onefoTest() {
 	fmt.Println("before Filed2: ", obj.GetFiled2())
 	fmt.Println()
 
+	// 使用 json.Marshal( )
 	fmt.Println("------------json序列化   [外层有oneof字段]")
 	jsonData, _ := json.Marshal(obj)
 	fmt.Println(string(jsonData))
-	fmt.Println("------------json反序列化 [失败]")
+	fmt.Println("------------json反序列化 [失败, Filed1消失]")
 	obj2 := pboneof.OneofTest{}
 	_ = json.Unmarshal(jsonData, &obj2)
 	fmt.Println(obj2)
@@ -66,6 +70,7 @@ func onefoTest() {
 	fmt.Println("after two: ", obj2.GetFiled2())
 	fmt.Println()
 
+	// 使用 protojson.Marshal( )
 	fmt.Println("------------protojson序列化  [外层无oneof字段]")
 	protoJsonData, _ := protojson.Marshal(obj)
 	fmt.Println(string(protoJsonData))

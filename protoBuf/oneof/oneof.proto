@@ -4,6 +4,7 @@ package oneof;
 
 
 message oneofTest {
+    // oneofName可能是 string 也可能是 int32; 最多只能存在一个
     oneof oneofName {
         string filed1 = 1;
         int32 filed2 = 2;

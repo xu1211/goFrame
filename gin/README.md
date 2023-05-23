@@ -2,16 +2,20 @@
 用来处理http
 
 - [helloword](./helloword.go)
-  - **gin.New()**  创建gin引擎路由
-  - **gin.Default()**  封装了gin.New(),会默认加载中间件
-  - gin.New().GET/POST/PUT/DELETE(http路径, 处理函数(`*gin.Context`))
-    - *gin.Context    封装了request和response
-    - *gin.Context.String()    写response 字符串
-  - gin.New().Run(:port)  监听端口启动路由
+  - 1.引入 `github.com/gin-gonic/gin`包
+  - 2.创建gin引擎路由
+    - **gin.New()**  创建gin引擎路由
+    - **gin.Default()**  封装了gin.New(),会默认加载中间件
+  - 3.绑定路由规则
+    - gin.New().GET/POST/PUT/DELETE(http路径, 处理函数(`*gin.Context`))
+      - *gin.Context    封装了request和response
+      - *gin.Context.String()    写response 字符串
+  - 4.启动路由
+    - gin.New().Run(:port)  监听端口启动路由
   
 ## 路由
 - [URL注册分组管理](./routesGroup.go)
-  - gin.New().Group()  创建路由组
+  - **gin.New().Group()**  创建路由组
   - gin.New().Group().GET/POST/PUT/DELETE()  路由组添加路由
 
 
@@ -57,4 +61,6 @@
   - gin.New.Use(中间件)  加载全局中间件
 - [局部中间件](./middleWare/LocalMiddleWare.go)
 
-## cookie session token
+## cookie session token //todo
+
+### c.Next() c.Abort()

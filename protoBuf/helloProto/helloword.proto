@@ -2,18 +2,24 @@ syntax = "proto3";
 
 package helloword;
 
+option go_package ="./;pb";
+
+service hellowordService {
+    rpc SayHello (helloRequest) returns (helloResponse);
+}
+
 // 请求消息
 message helloRequest {
-  // 姓名
-  string name = 1;
-  // 密码
-  int32 password = 3;
+    // 姓名
+    string name = 1;
+    // 密码
+    int32 password = 2;
 }
 
 // 响应消息
 message helloResponse {
-  // 错误码
-  int32 error = 1;
-  // 消息
-  string message = 2;
+    // 错误码
+    int32 error = 1;
+    // 消息
+    string message = 2;
 }

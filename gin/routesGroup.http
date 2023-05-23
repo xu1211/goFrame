@@ -1,0 +1,25 @@
+
+###
+GET http://localhost:8000/v1/login
+
+###
+GET http://localhost:8000/v1/login?name=abc
+
+###
+GET http://localhost:8000/v1/submit
+
+###
+GET http://localhost:8000/v1/submit?name=abc
+
+
+###
+POST http://localhost:8000/v2/login
+
+###
+POST http://localhost:8000/v2/login?name=abc
+
+###
+POST http://localhost:8000/v2/submit
+
+###
+POST http://localhost:8000/v2/submit?name=abc

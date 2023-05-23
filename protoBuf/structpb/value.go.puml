@@ -1,0 +1,124 @@
+@startuml
+namespace structpb {
+    class ListValue << (S,Aquamarine) >> {
+        - state protoimpl.MessageState
+        - sizeCache protoimpl.SizeCache
+        - unknownFields protoimpl.UnknownFields
+
+        + Values []*Value
+
+        + AsSlice() []<font color=blue>interface</font>{}
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + Reset() 
+        + String() string
+        + ProtoMessage() 
+        + ProtoReflect() protoreflect.Message
+        + Descriptor() ([]byte, []int)
+        + GetValues() []*Value
+
+    }
+    class NullValue << (S,Aquamarine) >> {
+        + Enum() *NullValue
+        + String() string
+        + Descriptor() protoreflect.EnumDescriptor
+        + Type() protoreflect.EnumType
+        + Number() protoreflect.EnumNumber
+        + EnumDescriptor() ([]byte, []int)
+
+    }
+    class Struct << (S,Aquamarine) >> {
+        - state protoimpl.MessageState
+        - sizeCache protoimpl.SizeCache
+        - unknownFields protoimpl.UnknownFields
+
+        + Fields <font color=blue>map</font>[string]*Value
+
+        + AsMap() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + Reset() 
+        + String() string
+        + ProtoMessage() 
+        + ProtoReflect() protoreflect.Message
+        + Descriptor() ([]byte, []int)
+        + GetFields() <font color=blue>map</font>[string]*Value
+
+    }
+    class Value << (S,Aquamarine) >> {
+        - state protoimpl.MessageState
+        - sizeCache protoimpl.SizeCache
+        - unknownFields protoimpl.UnknownFields
+
+        + Kind isValue_Kind
+
+        + AsInterface() <font color=blue>interface</font>{}
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + Reset() 
+        + String() string
+        + ProtoMessage() 
+        + ProtoReflect() protoreflect.Message
+        + Descriptor() ([]byte, []int)
+        + GetKind() isValue_Kind
+        + GetNullValue() NullValue
+        + GetNumberValue() float64
+        + GetStringValue() string
+        + GetBoolValue() bool
+        + GetStructValue() *Struct
+        + GetListValue() *ListValue
+
+    }
+    class Value_BoolValue << (S,Aquamarine) >> {
+        + BoolValue bool
+
+        - isValue_Kind() 
+
+    }
+    class Value_ListValue << (S,Aquamarine) >> {
+        + ListValue *ListValue
+
+        - isValue_Kind() 
+
+    }
+    class Value_NullValue << (S,Aquamarine) >> {
+        + NullValue NullValue
+
+        - isValue_Kind() 
+
+    }
+    class Value_NumberValue << (S,Aquamarine) >> {
+        + NumberValue float64
+
+        - isValue_Kind() 
+
+    }
+    class Value_StringValue << (S,Aquamarine) >> {
+        + StringValue string
+
+        - isValue_Kind() 
+
+    }
+    class Value_StructValue << (S,Aquamarine) >> {
+        + StructValue *Struct
+
+        - isValue_Kind() 
+
+    }
+    interface isValue_Kind  {
+        - isValue_Kind() 
+
+    }
+    class structpb.NullValue << (T, #FF7700) >>  {
+    }
+}
+
+"structpb.isValue_Kind" <|-- "structpb.Value_BoolValue"
+"structpb.isValue_Kind" <|-- "structpb.Value_ListValue"
+"structpb.isValue_Kind" <|-- "structpb.Value_NullValue"
+"structpb.isValue_Kind" <|-- "structpb.Value_NumberValue"
+"structpb.isValue_Kind" <|-- "structpb.Value_StringValue"
+"structpb.isValue_Kind" <|-- "structpb.Value_StructValue"
+
+"__builtin__.int32" #.. "structpb.NullValue"
+@enduml
