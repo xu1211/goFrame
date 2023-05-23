@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package helloword;
 
-option go_package ="./;pb";
+option go_package ="./;helloword";
 
-service hellowordService {
+service helloword {
     rpc SayHello (helloRequest) returns (helloResponse);
 }
 

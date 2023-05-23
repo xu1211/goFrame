@@ -27,6 +27,12 @@ protoc --proto_path=. --go-grpc_out=./ *.proto
 ```
 生成了grpc 服务定义代码 `helloword_grpc.pb.go`
 
+
+
+- 一块生成
+```
+protoc  --proto_path=. --go_out=./ --go-grpc_out=./ *.proto
+```
 ### oneof 
 一个oneof里可包括多种字段, 并且最多同时存在一个字段
 
