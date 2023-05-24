@@ -33,17 +33,18 @@ var (
 	port = flag.Int("port", 50051, "The server port")
 )
 
-// server is used to implement helloworld.GreeterServer.
+// server is used to implement helloworld.HellowordServer.
 type server struct {
-	pb.HellowordServiceServer
+	pb.HellowordServer
 }
 
-// SayHello implements helloworld.HellowordServer
+// SayHello 实现服务 helloworld.HellowordServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, error) {
-	log.Printf("Received: %v", in.GetName())
+	log.Printf("收到请求入参: %v", in.String())
 	return &pb.HelloResponse{Message: "Hello " + in.GetName()}, nil
 }
 
+// 启动grpc服务
 func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
@@ -51,7 +52,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterHellowordServiceServer(s, &server{})
+	pb.RegisterHellowordServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
