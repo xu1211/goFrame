@@ -1,11 +1,12 @@
 # gin框架
 用来处理http
+官网: https://gin-gonic.com/zh-cn/docs/
 
-- [helloword](./helloword.go)
+- [helloword](./route/helloword.go)
   - 1.引入 `github.com/gin-gonic/gin`包
   - 2.创建gin引擎路由
     - **gin.New()**  创建gin引擎路由
-    - **gin.Default()**  封装了gin.New(),会默认加载中间件
+    - **gin.Default()**  封装了gin.New(),会默认加载使用 Logger 和 Recovery 中间件
   - 3.绑定路由规则
     - gin.New().GET/POST/PUT/DELETE(http路径, 处理函数(`*gin.Context`))
       - *gin.Context    封装了request和response
@@ -14,7 +15,7 @@
     - gin.New().Run(:port)  监听端口启动路由
   
 ## 路由
-- [URL注册分组管理](./routesGroup.go)
+- [URL注册分组管理](./route/routesGroup.go)
   - **gin.New().Group()**  创建路由组
   - gin.New().Group().GET/POST/PUT/DELETE()  路由组添加路由
 
@@ -48,7 +49,7 @@
 - [重定向](./response/redirect.go)
   - *gin.Context.Redirect(响应码, "重定向URL路径")
 
-- 同步异步处理
+- TODO 同步异步处理
 
 ## [中间件](./middleWare/)
 相当于过滤器，拦截器
@@ -56,11 +57,32 @@
 用gin.Default() 创建的路由 会默认加载框架内置的中间件 Logger(), Recovery()\
   logger可以很方便的进行调试，recovery可以使用panic中断的恢复。
 
+可以为每个路由添加任意数量的中间件
 
 - [全局中间件](./middleWare/GlobalMiddleWare.go)
   - gin.New.Use(中间件)  加载全局中间件
 - [局部中间件](./middleWare/LocalMiddleWare.go)
 
-## cookie session token //todo
+- [Goroutine 与 gin.Context](./middleWare/Goroutine.go)
 
-### c.Next() c.Abort()
+- [gin.Context.Abort()](./middleWare/Abort.go)
+
+  执行后中断用户请求, 直接返回200，但响应的body中不会有数据
+  `Abort()`和`AbortWithStatusJSON()` 都是中止链的调用，不同之处在于，前者不会返回给前端任何内容，而后者则可以返回给前端一个JSON串。
+- 
+- [gin.Context.Next() ](./middleWare/Next.go)
+
+  中间件调用Next()方法，Next()方法之前的代码会在到达请求方法前执行，Next()方法之后的代码则在请求方法处理后执行：
+
+## cookie session token //todo
+- cookie
+```go
+//获取cookie
+gin.Context.Cookie("name")
+//设置cookie
+gin.Context.SetCookie("name", "Shimin Li", -1, "/", "localhost", false, true)
+```
+
+- session
+
+- token,jwt

@@ -1,0 +1,8 @@
+###
+GET http://localhost:8000/long_sync
+
+###
+GET http://localhost:8000/long_async
+
+### Abort,Next 测试
+GET http://localhost:8000/test

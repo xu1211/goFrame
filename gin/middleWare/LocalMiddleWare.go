@@ -14,7 +14,7 @@ func main() {
 	{
 		// 给路由 添加中间件, 可以添加多个中间件
 		v1.GET("/login", login, Validate3())
-		v1.GET("submit", submit)
+		v1.GET("/submit", submit)
 	}
 
 	// 创建路由组/v2 ，处理POST请求
